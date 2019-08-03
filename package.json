@@ -1,0 +1,17 @@
+{
+  "name": "arduinoreader",
+  "version": "1.0.0",
+  "description": "Reads serial port",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Arduino"
+  ],
+  "author": "Vincent Tran",
+  "license": "ISC",
+  "dependencies": {
+    "serialport": "^7.1.5"
+  }
+}
