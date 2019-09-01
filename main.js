@@ -1,13 +1,14 @@
 const serialPort = require('serialport');
-
+const twilio = require('twilio');
 
 let arduinoResponse = 0;
 
 const windowPath = 'COM4';
-const macPath = '/dev/cu.usbmodem14101';
+const macPath = '/dev/cu.usbmodem141101';
 const raspPath = '/dev/ttyACM0';
+
 //Creating port
-const myPort = new serialPort(raspPath, {
+const myPort = new serialPort(macPath, {
   baudRate: 9600,
 });
 //Creating parser
@@ -19,8 +20,31 @@ myPort.on('open', () => {
     console.log('Communication is on!');
 });
 
+//Twilio set-up
+var accountSid = '';
+var authToken = ''; 
+var client = new twilio(accountSid, authToken);
+
+var currentDoor = 0;
+
+var previousDoor = 68;
+
 //When parser activates, use callback function
 parser.on('data', (data) => {
+  currentDoor = Number(data.substring(0,data.indexOf('i')));
+  if(currentDoor - previousDoor >30){
+    client.messages.create({
+      body: 'Door has opened',
+      to: '',  // Text this number
+      from: '+14798885977' // From a valid Twilio number
+    })
+    .then((message) => 
+    {
+      console.log(message.sid)
+    });
+  }
+  previousDoor = currentDoor;
+  //console.log(Number(data.substring(0,data.indexOf('i'))))
   console.log(data);
 });
 
