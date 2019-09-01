@@ -4,10 +4,10 @@ const serialPort = require('serialport');
 let arduinoResponse = 0;
 
 const windowPath = 'COM4';
-const macPath = '/dev/cu.usbmodem14101'
-
+const macPath = '/dev/cu.usbmodem14101';
+const raspPath = '/dev/ttyACM0';
 //Creating port
-const myPort = new serialPort(macPath, {
+const myPort = new serialPort(raspPath, {
   baudRate: 9600,
 });
 //Creating parser

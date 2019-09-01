@@ -12,6 +12,7 @@
   "author": "Vincent Tran",
   "license": "ISC",
   "dependencies": {
-    "serialport": "^7.1.5"
+    "serialport": "^7.1.5",
+    "twilio": "^3.33.4"
   }
 }
