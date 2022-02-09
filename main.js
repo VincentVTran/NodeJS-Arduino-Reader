@@ -3,9 +3,14 @@ const twilio = require('twilio');
 
 let arduinoResponse = 0;
 
-const windowPath = 'COM4';
+const windowPath = 'COM3';
 const macPath = '/dev/cu.usbmodem141101';
 const raspPath = '/dev/ttyACM0';
+
+//Twilio set-up
+var accountSid = '';
+var authToken = ''; 
+var client = new twilio(accountSid, authToken);
 
 //Creating port
 const myPort = new serialPort(macPath, {
@@ -19,11 +24,6 @@ myPort.pipe(parser); //Adding parser to port
 myPort.on('open', () => {
     console.log('Communication is on!');
 });
-
-//Twilio set-up
-var accountSid = '';
-var authToken = ''; 
-var client = new twilio(accountSid, authToken);
 
 var currentDoor = 0;
 
